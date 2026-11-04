@@ -2,13 +2,17 @@ import { useState } from "react";
 import { useTransactions } from "../../hooks/transactions-hook";
 import { abbreviatedMonths } from "../../constants";
 import { capitaliseFirstLetter } from "../../helpers";
-import { formatMoney } from "../../lib/format"
+import { formatMoney } from "../../lib/format";
 import "./transaction-styling.css";
 
 export default function TransactionContainer() {
   const [searchQuery, setSearchQuery] = useState("");
   const { data, isPending, isError } = useTransactions(searchQuery);
   const transactions = data?.transactions || [];
+
+  const clearSearchButton = () => {
+    return <button onClick={() => setSearchQuery("")}>Clear search</button>;
+  };
 
   return (
     <div className="transaction-container">
@@ -70,11 +74,13 @@ export default function TransactionContainer() {
             <p className="transaction-table-info">
               ({transactions.length} newest, sorted by date descending)
             </p>
+            <div>{searchQuery && clearSearchButton()}</div>
           </div>
         ) : (
-          <p className="transaction-table-centre-text">
-            No transactions found.
-          </p>
+          <div className="transaction-table-centre-text">
+            <p>No transactions match your search.</p>
+            {searchQuery && clearSearchButton()}
+          </div>
         )}
       </div>
     </div>

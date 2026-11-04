@@ -1,5 +1,5 @@
 import type { Account } from "../../api/types";
-import { formatMoney } from "../../lib/format"
+import { formatMoney } from "../../lib/format";
 
 export default function TransferModalReview({
   account,
@@ -22,6 +22,11 @@ export default function TransferModalReview({
 }) {
   return (
     <div className="transfer-modal-review">
+      {errorFields && (
+        <p className="transfer-modal-error" role="alert">
+          Something went wrong. Your money hasn't left your account. Try again.
+        </p>
+      )}
       <h3>Check the details</h3>
       <dl>
         <div>
@@ -42,7 +47,7 @@ export default function TransferModalReview({
         </div>
         <div>
           <dt>Fee</dt>
-          <dd>{formatMoney(0.00)}</dd>
+          <dd>{formatMoney(0.0)}</dd>
         </div>
         <div>
           <dt>Note</dt>
