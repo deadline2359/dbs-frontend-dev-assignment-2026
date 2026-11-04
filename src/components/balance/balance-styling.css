@@ -1,0 +1,58 @@
+@import "../../../brief/design-tokens.css";
+
+.balance-container {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-lg);
+  gap: var(--space-1);
+}
+
+.balance-container-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-transfer-btn:active {
+  background: var(--brand-active);
+}
+
+.balance-container-content {
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+
+@media (max-width: 639px) {
+  .balance-container {
+    min-width: 0;
+    width: 100%;
+    padding: var(--space-4);
+  }
+
+  .balance-container h3 {
+    margin-block: 0;
+  }
+
+  .balance-container-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .new-transfer-btn {
+    position: fixed;
+    right: var(--gutter-mobile);
+    bottom: var(--space-4);
+    left: var(--gutter-mobile);
+    z-index: var(--z-header);
+    min-height: var(--tap-target);
+    min-width: var(--tap-target);
+    width: auto;
+    box-shadow: var(--shadow-lg);
+  }
+}

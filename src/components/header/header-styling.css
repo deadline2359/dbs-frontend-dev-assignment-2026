@@ -1,0 +1,290 @@
+@import "../../../brief/design-tokens.css";
+
+.app-navigation-toggle {
+  display: none;
+}
+
+.app-navigation.mobile {
+  display: none;
+}
+
+.segment-switch.mobile {
+  display: none;
+}
+
+.app-header {
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: var(--space-2);
+  min-height: var(--header-height);
+  padding-block: var(--space-3);
+}
+
+.app-brand {
+  align-items: center;
+  color: var(--text);
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--space-2);
+  text-decoration: none;
+}
+
+.app-brand-mark,
+.account-menu {
+  align-items: center;
+  background: var(--brand);
+  border-radius: var(--radius-full);
+  color: var(--on-brand);
+  display: inline-flex;
+  height: 32px;
+  justify-content: center;
+  width: 32px;
+}
+
+.app-brand strong {
+  font-size: var(--text-lg);
+}
+
+.app-navigation {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.app-navigation a,
+.app-navigation span {
+  color: var(--text-muted);
+  font-size: var(--text-md);
+  text-decoration: none;
+}
+
+.app-navigation-link.active {
+  color: var(--text);
+  font-weight: var(--weight-bold);
+}
+
+.app-navigation-link.disabled {
+  pointer-events: none;
+  color: var(--text-muted);
+}
+
+.app-header-container,
+.app-header-container-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: var(--space-2);
+}
+
+.app-header-actions {
+  align-items: center;
+  display: flex;
+  gap: var(--space-2);
+  margin-left: auto;
+  flex-direction: row;
+}
+
+.segment-switch {
+  display: flex;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  width: 190px;
+}
+
+.segment-switch-btn-retail {
+  border-radius: var(--radius-full) 0 0 var(--radius-full);
+  overflow: hidden;
+}
+
+.segment-switch-btn-premium {
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+  overflow: hidden;
+}
+
+.segment-switch button,
+.theme-toggle,
+.account-menu {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.segment-switch button {
+  background: transparent;
+  color: var(--text-muted);
+  padding: var(--space-2);
+  width: 100%;
+  font-weight: var(--weight-semibold);
+}
+
+.segment-switch button.active {
+  background: var(--brand);
+  color: var(--on-brand);
+}
+
+.segment-switch button:hover {
+  background: var(--brand-hover);
+  color: var(--on-brand);
+  font-weight: var(--weight-semibold);
+}
+
+.theme-toggle {
+  background: var(--surface-raised);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  height: 32px;
+  width: 32px;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.account-menu {
+  flex-shrink: 0;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+}
+
+@media (min-width: 639px) and (max-width: 899px) {
+  .app-navigation a {
+    font-size: var(--text-sm);
+  }
+
+  .segment-switch {
+    width: 150px;
+    font-size: var(--text-sm);
+  }
+}
+
+@media (max-width: 639px) {
+  .account-menu {
+    min-width: var(--tap-target);
+    min-height: var(--tap-target);
+  }
+
+  .app-header {
+    display: grid;
+    grid-template-areas:
+      "brand actions"
+      "navigation navigation";
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-3);
+  }
+
+  .app-brand {
+    grid-area: brand;
+    min-width: 0;
+  }
+
+  .app-brand strong {
+    font-size: var(--text-base);
+  }
+
+  .app-navigation {
+    display: none;
+    grid-area: navigation;
+    width: 100%;
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .app-navigation.is-open {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-2);
+    width: 100%;
+  }
+
+  .app-navigation.is-open a,
+  .app-navigation.is-open span {
+    display: block;
+    padding: var(--space-2) 0;
+    min-width: var(--tap-target);
+    min-height: var(--tap-target);
+  }
+
+  .app-navigation-toggle {
+    display: inline-flex;
+    align-items: center;
+    min-width: var(--tap-target);
+    min-height: var(--tap-target);
+    background: var(--surface-muted);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    gap: var(--space-4);
+  }
+
+  .app-header-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-header-container-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: var(--space-4);
+  }
+
+  .app-header-container-bottom {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .app-navigation-toggle:hover {
+    background: var(--surface-raised);
+    color: var(--text);
+  }
+
+  .app-header-actions {
+    grid-area: actions;
+    min-width: 0;
+    margin-left: auto;
+    gap: var(--space-2);
+    justify-content: flex-end;
+  }
+
+  .segment-switch {
+    flex: 1 1 auto;
+    margin-top: var(--space-2);
+  }
+
+  .segment-switch.desktop {
+    display: none;
+  }
+
+  .segment-switch.mobile {
+    display: flex;
+    width: 100%;
+  }
+
+  .segment-switch button {
+    flex: 1 1 auto;
+    min-width: 80px;
+    padding-inline: var(--space-2);
+    white-space: nowrap;
+  }
+
+  .theme-toggle {
+    flex: 0 1 auto;
+    min-width: var(--tap-target);
+    min-height: var(--tap-target);
+    width: auto;
+    padding-inline: var(--space-2);
+    white-space: nowrap;
+  }
+
+  .main-content {
+    gap: var(--space-4);
+    min-width: 0;
+    width: 100%;
+  }
+}

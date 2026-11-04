@@ -1,0 +1,36 @@
+@import "../../../brief/design-tokens.css";
+
+.main-content {
+  grid-column: span 9;
+  gap: var(--gutter);
+  display: grid;
+}
+
+.balance-visibility-toggle-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.balance-visibility-toggle {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.balance-visibility-toggle:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+@media (min-width: 1024px) {
+  .main-content {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 639px) {
+  .main-content {
+    gap: var(--space-4);
+    min-width: 0;
+    width: 100%;
+  }
+}

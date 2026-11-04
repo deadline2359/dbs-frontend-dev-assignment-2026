@@ -1,39 +1,81 @@
-import { useQuery } from '@tanstack/react-query'
-import { apiFetch } from './api/client'
-import type { Health } from './api/types'
+import { useCustomer } from "./hooks/customer-hook";
+import RightRail from "./components/right-rail/right-rail";
+import MainContent from "./components/main-content/main-content";
+import { useState } from "react";
+import TransferModal from "./components/transfer-modal/transfer-modal";
+import { useAccounts } from "./hooks/accounts-hook";
+import Header from "./components/header/header";
 
 export default function App() {
-  const health = useQuery({
-    queryKey: ['health'],
-    queryFn: () => apiFetch<Health>('/api/health'),
-    retry: false,
-  })
+  const {
+    data: customerData,
+    isPending: customerIsPending,
+    isError: customerIsError,
+    refetch: refetchCustomer,
+  } = useCustomer();
+  const {
+    data: accountsData,
+    isPending: accountsIsPending,
+    isError: accountsIsError,
+    refetch: refetchAccounts,
+  } = useAccounts();
+  const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
 
-  const status = health.isPending
-    ? 'checking…'
-    : health.isError
-      ? 'not connected'
-      : 'connected'
+  if (customerIsPending || customerIsError) {
+    return (
+      <div className={`customer-loading-screen`}>
+        {customerIsPending && "Loading customer..."}
+        {customerIsError && (
+          <div className="customer-error-screen">
+            Unable to load customer. Please try again later.
+          <button type="button" onClick={() => void refetchCustomer()}>
+            Retry
+          </button>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  const customer = customerData.customer;
+  const accounts = accountsData?.accounts || [];
 
   return (
     <div className="starter">
-      <header className="starter-header">
-        <strong>Meridian</strong>
-        <span>Take-home starter</span>
-      </header>
+      <div>
+        <Header segment={customer.segment} />
+        {accountsIsPending || accountsIsError ? (
+          <span>
+            {accountsIsPending && "Loading accounts..."}
+            {accountsIsError &&
+              <>
+                Unable to load accounts. Please try again later.
+                <button type="button" onClick={() => void refetchAccounts()}>
+                  Retry
+                </button>
+              </>}
+          </span>
+        ) : (
+          <div>
+            {isTransferModalOpen && (
+              <TransferModal
+                customer={customer}
+                accounts={accounts}
+                setIsTransferModalOpen={setIsTransferModalOpen}
+              />
+            )}
 
-      <main className="starter-main">
-        <h1>Build the dashboard and transfer flow</h1>
-        <p>
-          Start with <code>README.md</code>, then read{' '}
-          <code>brief/candidate-brief.md</code>. Replace this screen with your
-          app.
-        </p>
-
-        <p className="status" role="status">
-          Mock API: {status}
-        </p>
-      </main>
+            <main className="starter-main">
+              <MainContent
+                accounts={accounts}
+                customer={customer}
+                setIsTransferModalOpen={setIsTransferModalOpen}
+              />
+              <RightRail customer={customer} />
+            </main>
+          </div>
+        )}
+      </div>
     </div>
-  )
+  );
 }

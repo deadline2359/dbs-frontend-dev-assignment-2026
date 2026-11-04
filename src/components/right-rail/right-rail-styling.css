@@ -1,0 +1,30 @@
+@import "../../../brief/design-tokens.css";
+
+.right-rail {
+  grid-column: span 3;
+}
+
+.progress-bar {
+  background: var(--surface-raised);
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  height: 20px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  background: var(--brand);
+  height: 100%;
+}
+
+@media (min-width: 1024px) {
+  .right-rail {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 639px) {
+  .right-rail {
+    display: none;
+  }
+}

@@ -1,0 +1,281 @@
+@import "../../../brief/design-tokens.css";
+
+.transfer-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dialog);
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: var(--overlay);
+}
+
+.discard-transfer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dialog);
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: var(--overlay);
+}
+
+.discard-transfer-dialog {
+  width: min(100%, 360px);
+  padding: var(--space-6);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.discard-transfer-dialog h3,
+.discard-transfer-dialog p {
+  margin-top: 0;
+}
+
+.discard-transfer-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+.transfer-modal {
+  width: min(100%, 520px);
+  max-height: calc(100dvh - var(--space-8));
+  overflow: auto;
+  padding: var(--space-4) var(--space-6);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  gap: var(--space-2);
+  display: flex;
+  flex-direction: column;
+}
+
+.transfer-modal input,
+.transfer-modal select {
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-md);
+}
+
+.transfer-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transfer-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-6);
+}
+
+.transfer-modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: var(--text-3xl);
+  line-height: 1;
+}
+
+.transfer-modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.transfer-modal-info-text {
+  color: var(--text-muted);
+}
+
+.transfer-modal-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.transfer-modal-review {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.transfer-modal-review dl {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.transfer-modal-review dl > div,
+.transfer-modal-review-total {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.transfer-modal-review dt {
+  color: var(--text-muted);
+  min-width: 64px;
+}
+
+.transfer-modal-review dd {
+  margin: 0;
+  text-align: right;
+}
+
+.transfer-modal-review hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.transfer-modal-review-hint,
+.transfer-modal-error {
+  margin: 0;
+}
+
+.transfer-modal-error {
+  color: var(--negative);
+}
+
+.transfer-modal-field-error {
+  color: var(--negative);
+  font-size: var(--text-sm);
+}
+
+.transfer-modal-recipient-fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.transfer-modal-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-8) 0;
+  text-align: center;
+}
+
+.transfer-modal-success-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: var(--radius-full);
+  background: var(--positive-soft);
+  color: var(--positive);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+}
+
+.transfer-modal-success p,
+.transfer-modal-success h2 {
+  margin: 0;
+}
+
+.transfer-modal-success-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.transfer-modal-success-actions button {
+  min-height: var(--tap-target);
+}
+
+.transfer-modal-new-recipient-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.transfer-modal-new-recipient-form select,
+.transfer-modal-new-recipient-form option {
+  color: var(--text-muted);
+}
+
+.transfer-modal-amount {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.transfer-modal-selectable-amts {
+  display: flex;
+  margin-inline: auto;
+  gap: var(--space-4);
+}
+
+.transfer-modal-selectable-amts button {
+  min-width: 60px;
+}
+
+.transfer-modal-input,
+.transfer-modal-amount-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.transfer-modal-input-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transfer-modal-stepper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-4);
+  font-weight: var(--weight-semibold);
+  margin-left: var(--space-6);
+  margin-right: var(--space-6);
+}
+
+.transfer-modal-stepper-active {
+  color: var(--brand);
+  font-weight: var(--weight-bold);
+}
+
+.transfer-modal-recipient-list td {
+  padding: var(--space-2);
+  vertical-align: middle;
+}
+
+.transfer-modal-recipient-list label {
+  cursor: pointer;
+}
+
+.transfer-modal-recipient-list.disabled label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.info {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+@media (max-width: 639px) {
+  .transfer-modal-overlay {
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .transfer-modal {
+    width: 100%;
+    max-height: none;
+    border-radius: 0;
+    padding: var(--space-4);
+  }
+}

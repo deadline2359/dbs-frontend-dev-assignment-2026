@@ -1,0 +1,149 @@
+@import "../../../brief/design-tokens.css";
+
+.transaction-container {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-lg);
+  min-height: 480px;
+}
+
+.transaction-container-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.search-box {
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2) var(--space-4);
+  height: 40px;
+}
+
+.transactions-search {
+  position: relative;
+}
+
+.transactions-search-clear {
+  position: absolute;
+  top: 50%;
+  right: var(--space-2);
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: var(--text-lg);
+  line-height: 1;
+  padding: var(--space-1);
+}
+
+.transaction-table-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.transaction-table-container table {
+  min-width: 300px;
+  width: 100%;
+  color: var(--text-muted);
+  border-collapse: collapse;
+}
+
+.transaction-table-results {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.transaction-table-container tr {
+  border: 2px solid var(--border-strong);
+}
+
+.transaction-table-container td {
+  padding: var(--space-2) var(--space-4);
+}
+
+.transaction-table-positive-value {
+  color: var(--positive);
+}
+
+.transaction-table-info {
+  margin-top: auto;
+}
+
+.transaction-table-centre-text {
+  margin: auto;
+  text-align: center;
+}
+
+@media (max-width: 639px) {
+  .transaction-container {
+    min-height: 0;
+  }
+
+  .transaction-container {
+    min-width: 0;
+    width: 100%;
+    padding: var(--space-4);
+  }
+
+  .transaction-container h3 {
+    margin-block: 0;
+  }
+
+  .transaction-container-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .transaction-table-container,
+  .transaction-table-results {
+    flex: none;
+    min-height: 0;
+  }
+
+  .transaction-table-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .transaction-table-results {
+    height: auto;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .transaction-table-results table {
+    min-width: 0;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .transaction-table-container td {
+    overflow-wrap: anywhere;
+    padding: var(--space-2);
+  }
+
+  .transaction-table-results {
+    font-size: var(--text-xs);
+  }
+
+  .transaction-table-container table {
+    min-width: 100%;
+  }
+
+  .transactions-search,
+  .search-box {
+    width: 100%;
+  }
+}
