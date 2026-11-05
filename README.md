@@ -1,5 +1,3 @@
-# Meridian Banking — Frontend Take-Home
-```md
 # Meridian Banking — Ailys Tee
 
 - Deployed: https://ailys-tee-dbs-assignment-2026.netlify.app/
@@ -61,4 +59,3 @@ Besides that, the initial header created, while fits the requirements, performed
 - Create a reusable component for the search bars for both transactions and payee selections.
 - Create a reusable combobox component, instead of just using dropdowns
 - Modify the list of transactions to use another layout, instead of table, in mobile view, so the table does not feel shrunk
-```
