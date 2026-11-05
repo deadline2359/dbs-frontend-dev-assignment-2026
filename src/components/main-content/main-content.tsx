@@ -3,7 +3,6 @@ import type { Customer, Account } from "../../api/types";
 import BalanceContainer from "../balance/balance-container";
 import AccountsContainer from "../account/accounts-container";
 import TransactionContainer from "../transaction/transaction-container";
-import { filterForDepositAccounts } from "../../helpers";
 import { formatShortDate } from "../../lib/format";
 import { useState } from "react";
 import "./main-content-styling.css";
@@ -12,10 +11,14 @@ export default function MainContent({
   customer,
   accounts,
   setIsTransferModalOpen,
+  accountsIsPending,
+  accountsIsError,
 }: {
   customer: Customer;
   accounts: Account[];
   setIsTransferModalOpen: (isOpen: boolean) => void;
+  accountsIsPending: boolean;
+  accountsIsError: boolean;
 }) {
   const [isBalanceVisible, setIsBalanceVisible] = useState(true);
 
@@ -26,8 +29,6 @@ export default function MainContent({
   const dateTime = new Date();
   const weekday = weekdays[dateTime.getDay()];
 
-  const depositAccounts = filterForDepositAccounts(accounts);
-
   return (
     <div className="main-content">
       <div>
@@ -36,6 +37,18 @@ export default function MainContent({
           {weekday}, {formatShortDate(dateTime.toISOString())}
         </span>
       </div>
+      {accountsIsPending ? (
+        <span>Loading accounts...</span>
+      ) : (
+        (accounts.length === 0 || accountsIsError) && (
+          <div>
+            <span className="error-text" role="alert">
+              Unable to load accounts. Please try again later.
+            </span>
+          </div>
+        )
+      )}
+
       <div className="balance-visibility-toggle-container">
         <button
           type="button"
@@ -47,7 +60,7 @@ export default function MainContent({
         </button>
       </div>
       <BalanceContainer
-        depositAccounts={depositAccounts}
+        accounts={accounts}
         setIsTransferModalOpen={setIsTransferModalOpen}
         isBalanceVisible={isBalanceVisible}
       />

@@ -24,3 +24,10 @@ export function hideBalance(
 ): string {
   return isBalanceVisible ? balance : "••••••";
 }
+
+export const retryPage = () => {
+  const currentUrl = new URL(window.location.href);
+  currentUrl.searchParams.delete("scenario");
+  currentUrl.searchParams.delete("delay");
+  window.location.assign(currentUrl.toString());
+};

@@ -15,8 +15,6 @@ export default function TransferModalFooter({
   onContinue: () => void;
   onConfirm: () => void;
 }) {
-
-  console.log('isSending', isSending);
   return (
     <div className="transfer-modal-footer">
       {currentStep === 1 ? (

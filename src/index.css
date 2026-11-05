@@ -74,6 +74,10 @@ button:disabled {
   padding: var(--gutter);
 }
 
+.error-text {
+  color: var(--negative);
+}
+
 .starter-main h1 {
   font-size: var(--text-2xl);
   letter-spacing: var(--tracking-tight);
@@ -108,6 +112,38 @@ button:disabled {
   font-weight: var(--weight-regular);
 }
 
+.debug-menu {
+  position: fixed;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  z-index: var(--z-toast);
+}
+
+.debug-menu button {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-raised);
+  color: var(--text);
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+}
+
+.debug-menu-toggle {
+  font-weight: var(--weight-semibold);
+}
+
+.debug-menu-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-lg);
+}
+
 @media (min-width: 1024px) {
   .starter-main {
     grid-template-columns: minmax(0, 1fr) 300px;
@@ -136,5 +172,9 @@ button:disabled {
 
   .customer-loading-screen {
     padding: var(--gutter-mobile);
+  }
+
+  .debug-menu {
+    bottom: calc(var(--space-4) + var(--tap-target) + var(--space-2));
   }
 }

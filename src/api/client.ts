@@ -28,8 +28,16 @@ export async function apiFetch<T>(
   path: string,
   init?: RequestInit,
 ): Promise<T> {
-  const url = `${BASE_URL}${path.replace(/^\//, '')}`
-  const response = await fetch(url, init)
+  const url = new URL(
+    `${BASE_URL}${path.replace(/^\//, '')}`,
+    window.location.origin,
+  )
+  const params = new URLSearchParams(window.location.search)
+  for (const key of ["scenario", "delay"]) {
+    const value = params.get(key)
+    if (value) url.searchParams.set(key, value)
+  }
+  const response = await fetch(url.toString(), init)
   const body = (await response.json().catch(() => null)) as
     | T
     | ApiErrorBody

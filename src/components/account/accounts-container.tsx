@@ -12,9 +12,13 @@ export default function AccountsContainer({
   return (
     <div className="accounts-container">
       <h3>ACCOUNTS</h3>
-      {accounts.map((account) => (
-        <AccountCard key={account.id} account={account} isBalanceVisible={isBalanceVisible} />
-      ))}
+      {accounts.length > 0 ? (
+        accounts.map((account) => (
+          <AccountCard key={account.id} account={account} isBalanceVisible={isBalanceVisible} />
+        ))
+      ) : (
+        <p>No accounts available.</p>
+      )}
     </div>
   );
 }

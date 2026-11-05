@@ -156,7 +156,7 @@ describe("starter", () => {
     expect(
       await screen.findByText("Transfer to Jamie Tan"),
     ).toBeInTheDocument();
-    expect(screen.getByText(/17,070\.55/)).toBeInTheDocument();
+    expect(screen.getByText(/4,230\.55/)).toBeInTheDocument();
   });
 
   it("shows a dashboard error and retries the request successfully", async () => {

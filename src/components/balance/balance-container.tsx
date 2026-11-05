@@ -1,18 +1,21 @@
 import type { Account } from "../../api/types";
 import { formatMoney } from "../../lib/format";
 import "./balance-styling.css";
-import { hideBalance } from "../../helpers";
+import { filterForDepositAccounts, hideBalance } from "../../helpers";
 
 export default function BalanceContainer({
-  depositAccounts,
+  accounts,
   setIsTransferModalOpen,
   isBalanceVisible,
 }: {
-  depositAccounts: Account[];
+  accounts: Account[];
   setIsTransferModalOpen: (isOpen: boolean) => void;
   isBalanceVisible: boolean;
 }) {
-  const totalBalance = depositAccounts.reduce(
+
+  const depositAccounts = filterForDepositAccounts(accounts);
+
+  const totalBalance = accounts.reduce(
     (acc, account) => acc + account.balance,
     0,
   );
@@ -24,6 +27,7 @@ export default function BalanceContainer({
         <button
           className="btn btn-primary new-transfer-btn"
           onClick={() => setIsTransferModalOpen(true)}
+          disabled={depositAccounts.length === 0}
         >
           Transfer
         </button>

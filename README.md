@@ -1,135 +1,64 @@
 # Meridian Banking — Frontend Take-Home
-
-Build a small banking app for one customer: a **dashboard** that shows her
-accounts and recent transactions, and a **three-step transfer** that sends money
-to a payee.
-
-You get a working React + TypeScript starter with a mock API already wired in,
-plus design tokens and a wireframe. You don't need a backend, and you don't need
-to invent data.
-
-|  |  |
-| --- | --- |
-| **Time** | Submit within **2 weeks** of receiving this. Most people need about **8–12 hours**; you don't need to use the full two weeks. |
-| **AI tools** | Allowed. In the follow-up call you explain your code and change it live, **without AI help**. See [How we assess](#4-how-we-assess). |
-| **Stack** | React 19, TypeScript, Vite, TanStack Query, React Hook Form, Zod, MSW, Vitest (all installed). Node 22. |
-
----
-
-## 1. Get started
-
-1. Open **https://github.com/Harmonice-Mundi/2026-fe-assignment/generate**
-   (or press **Use this template** → **Create a new repository**). Choose your
-   own account as the owner, keep it **Public**, and click **Create
-   repository**.
-2. Clone your copy and run:
-
-   ```bash
-   npm install
-   npm run dev        # http://localhost:5173
-   ```
-
-   You should see **"Mock API: connected"**. That screen is a placeholder;
-   replace it with your app.
-
-3. Read the docs below in order before writing code.
-
-## 2. What to read
-
-| Read | What it gives you |
-| --- | --- |
-| 1. [`brief/candidate-brief.md`](brief/candidate-brief.md) | **The spec.** What to build, what's required vs optional, exact copy. |
-| 2. [`wireframes/wireframe.md`](wireframes/wireframe.md) | Layout of each screen (low fidelity — no visual design). |
-| 3. [`brief/api-contract.md`](brief/api-contract.md) | Endpoints, types, errors, and test hooks. |
-
-Look these up when you need them:
-
-- [`DEPLOYMENT.md`](DEPLOYMENT.md): hosting settings and fixes for common mock-API
-  problems.
-- [`brief/design-tokens.css`](brief/design-tokens.css): colours, spacing and type
-  (already imported).
-- [`mock-api/README.md`](mock-api/README.md): the optional Node mock server.
-
-## 3. What's already in the starter
-
-| Path | What it is |
-| --- | --- |
-| `src/api/client.ts`, `src/api/types.ts` | Typed `apiFetch` helper and the API types. Build your queries on these. |
-| `src/lib/format.ts` | `formatMoney` and `formatShortDate`. Use them so amounts and dates match the brief. |
-| `src/mocks/`, `mock-api/` | The mock API. It runs in the browser, in tests, and in your deployed site. **Don't edit it.** |
-| `src/test/setup.ts` | Test setup. The mock data resets before every test. |
-| `src/App.tsx` | Placeholder screen. Replace it. |
-
-How you structure folders, components and features is **up to you** — that's
-part of what we look at.
-
-```bash
-npm run dev        # start the app
-npm test           # run tests once (npm run test:watch to keep watching)
-npm run lint       # ESLint
-npm run typecheck  # TypeScript
-npm run check      # lint + typecheck + tests
-npm run build      # production build into dist/
-```
-
-Run `npm run check` and `npm run build` before you submit; both should pass.
-
-## 4. How we assess
-
-1. **We open your deployed app** and run through the flows in the brief.
-2. **We read your code and README.** We look at how you structured the
-   project, the decisions you made, and whether the tests check real behaviour.
-3. **We have a follow-up call with you (about 45 minutes).** You share your
-   screen and:
-   - walk us through the structure and two or three decisions you made;
-   - trace one flow through the code (for example, what happens from
-     `Confirm transfer` until the balance updates);
-   - make **one or two small changes live**, without AI assistance. They are
-     the size of "add a validation rule" or "show one more field". Your
-     normal editor, docs and search are fine.
-
-**On AI:** use whatever tools you like while building. We are not checking
-whether code was AI-generated. We are checking that **you understand all of
-it** and made deliberate choices. If you can't explain a piece of code, it
-counts against you, whoever wrote it. Your README must say what you used AI
-for (see below).
-
-A smaller app you understand well scores better than a bigger one you can't
-explain.
-
-## 5. Submit
-
-1. **Deploy** to Netlify, Vercel or Cloudflare Pages (settings in
-   [`DEPLOYMENT.md`](DEPLOYMENT.md)). The deployed site must work with no local
-   server.
-2. **Replace this README** with your own, using the outline below.
-3. **Reply to the invitation email** with your repo URL and your deployed URL.
-
-### Your README
-
 ```md
-# Meridian Banking — <Your Name>
+# Meridian Banking — Ailys Tee
 
-- Deployed: <url>
+- Deployed: https://ailys-tee-dbs-assignment-2026.netlify.app/
 - Run locally: `npm install && npm run dev`
 
 ## Project structure
-Folders and what each is responsible for.
+- `src/App.tsx`: Loads the customer and account queries, renders the dashboard,
+  and controls the transfer modal.
+- `src/components/`: Dashboard, header, balance, account, transaction, right
+  rail, debug-menu, and transfer-modal UI components.
+    - `src/components/transfer-modal/`: Three-step transfer flow, Zod validation,
+  field error handling, review, success, and discard confirmation.
+- `src/hooks/`: TanStack Query hooks for customer, account, payee, transaction,
+  health, and transfer API operations.
+- `src/api/`: Typed API client and shared API response types.
+- `src/app.test.tsx`: Tests created.
 
 ## Decisions and trade-offs
-Server state vs UI state, forms and validation, theming, anything you
-chose deliberately, and what you'd change.
+- The header in mobile and desktop view is purposely modified to be different to ensure all buttons are accommodating .
+- I added an additional validation so that the user is forced to choose a payee from the existing list, if the user clicks "Continue" without any input.
+- Buttons are disabled when certain endpoints are producing an error or pending. Example: User cannot click on "Transfer" button when accounts are not loaded.
 
 ## Loading, empty and error states
-How you handled them, and how to see each one in the deployed app.
+- Query loading states are shown for the dashboard, accounts, transactions, and
+  payees. Query failures show an error message and a `Retry` action where
+  applicable.
+- Empty transaction searches show `No transactions match your search.` and a
+  clear-search action. Empty payee lists show an appropriate empty state.
+- Transfer validation errors are shown inline, while send failures use an
+  accessible alert and do not show the success screen.
+- Open the **Debug** menu in the app to trigger the documented mock API states:
+  `?scenario=error`, `?scenario=empty`, and `?delay=1500`. Use **Clear debug
+  state** to remove those query parameters and reload the app.
 
 ## Tests
-What they cover and why you picked those cases.
+The tests in `src/App.test.tsx` cover:
+
+- Dashboard loading from the mock API.
+- Transactions loading into the table.
+- A transaction search with no results, loading feedback, and clearing the
+  search.
+- Empty transfer inputs showing inline validation errors.
+- Amounts over the available balance being rejected without sending a request.
+- Successful transfers showing the success screen and updating the dashboard.
+- Dashboard request failures recovering through `Retry`.
+
+Outside of the 3 test cases required and the original dashboard loading test, I have created 3 more tests which focus on user-visible behaviors and the transfer flow.
 
 ## AI use
-Which tools, and what for. Name two or three places where you changed,
-rejected or fixed what the AI produced, and why.
+I have used Copilot in creating basic layouts for the header and the modals, generating tests, researching, creating debug menu and modifying the styling for mobile layouts and themes.
+
+In generating the tests, I realised that Copilot had made several mistakes on the flow of creating a transfer, which I have corrected. 
+
+I also edited the balance hiding feature, where it failed to understand that the feature should also apply to account balances, not just total available balance.
+
+Besides that, the initial header created, while fits the requirements, performed badly when the screen is minimised to a smaller size. As such, I had further asked Copilot to fix the header to fit a mobile layout, which it struggled with as it only shrank the size of the texts, styling etc. As such, I have gone on to manually tweak the layout of the header in mobile layout, such that there would be a hamburger menu and the user segment buttons would be shown before the menu. I believe this would better accommodate for user experience.
 
 ## Not done / known issues
-What you left out or would do with more time.
+- Create a reusable component for the search bars for both transactions and payee selections.
+- Create a reusable combobox component, instead of just using dropdowns
+- Modify the list of transactions to use another layout, instead of table, in mobile view, so the table does not feel shrunk
 ```
