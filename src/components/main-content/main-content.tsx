@@ -4,8 +4,10 @@ import BalanceContainer from "../balance/balance-container";
 import AccountsContainer from "../account/accounts-container";
 import TransactionContainer from "../transaction/transaction-container";
 import { formatShortDate } from "../../lib/format";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./main-content-styling.css";
+
+const BALANCE_VISIBILITY_KEY = "meridian-balance-visible";
 
 export default function MainContent({
   customer,
@@ -20,7 +22,17 @@ export default function MainContent({
   accountsIsPending: boolean;
   accountsIsError: boolean;
 }) {
-  const [isBalanceVisible, setIsBalanceVisible] = useState(true);
+  const [isBalanceVisible, setIsBalanceVisible] = useState(() => {
+    const savedVisibility = localStorage.getItem(BALANCE_VISIBILITY_KEY);
+    return savedVisibility !== "false";
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      BALANCE_VISIBILITY_KEY,
+      String(isBalanceVisible),
+    );
+  }, [isBalanceVisible]);
 
   // deconstructure customer
   const { firstName } = customer;
