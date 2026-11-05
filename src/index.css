@@ -115,7 +115,7 @@ button:disabled {
 .debug-menu {
   position: fixed;
   right: var(--space-4);
-  bottom: var(--space-4);
+  bottom: var(--space-16);
   z-index: var(--z-toast);
 }
 
